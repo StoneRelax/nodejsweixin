@@ -11,10 +11,12 @@ const path = require('path');
 const config = require('../config');
 
 /* GET home page. */
-router.get('/', function(req,res){
+/* router.get('/', function(req,res){
 	enterWeixin(req,res);
-});
+});*/
 router.post('/',function(req,res){
+	console.log('trying to reply');
+	console.log(req.body.xml.content);
 	autoreply(req,res);
 });
 
