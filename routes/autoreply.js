@@ -2,6 +2,7 @@
 "use strict";
 const request = require('request');
 const config = require('../config.js');
+var Q = require("q");
 
 function autoreply(req,res){
 	console.log('starting parsing');
@@ -9,10 +10,15 @@ function autoreply(req,res){
 	console.log(infostr);
 	//var codedcontent = encodeURI(reqxml);
 	//console.log(condedcontent);
-	var tulingsays = getTulingRes(infostr); 
+	getTulingRes(infostr).then(function(data){
+	var strbody = JSON.parse(data);
+	console.log("get response text from tuling :"+strbody.code+"   "+strbody.text);
+	var tulingsays = strbody.text;
 	res.end('<xml><ToUserName><![CDATA['+req.body.xml.fromusername+']]></ToUserName><FromUserName><![CDATA['+req.body.xml.tousername+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+tulingsays+']]></Content></xml>');
+});
 }
 function getTulingRes(info){
+	var defer = Q.derfer();
 	info = info.toString();
 	console.log("getTulingRes got the input  "+info);
 	var infolist = {
@@ -31,10 +37,14 @@ function getTulingRes(info){
 	console.log(options);
 	console.log('now sending api to tuling');	
 	request(options,function(err,res,body){
-		var strbody = JSON.parse(body);
-		console.log("get response text from tuling :"+strbody.code+"   "+strbody.text);
-		return strbody.text;
+		
+		if(res){
+			defer.resolve(body);
+		} else if(err){
+			Q.reject(err);
+		}
 		});
+	return defer.promise;
 }
 
 module.exports = autoreply;
