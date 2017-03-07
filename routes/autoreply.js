@@ -13,25 +13,26 @@ function autoreply(req,res){
 	res.end('<xml><ToUserName><![CDATA['+req.body.xml.fromusername+']]></ToUserName><FromUserName><![CDATA['+req.body.xml.tousername+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+tulingsays+']]></Content></xml>');
 }
 function getTulingRes(info){
+	info = info.toString();
 	console.log("getTulingRes got the input  "+info);
 	var infolist = {
-		"key":"config.tulingkey",
-		"info":info
+		key:config.tulingkey,
+		info:info
 	};
-	console.log("infolist: "+infolist);
+	console.log("infolist: "+JSON.stringify(infolist));
 	var options = {
 	method:'POST',
 	url:config.tulingapi,
 	headers:{
 	'content-type': "application/json"
 		},
-	body:Json.stringify(infolist)
+	body:JSON.stringify(infolist)
 	};
 	console.log(options);
 	console.log('now sending api to tuling');	
 	request(options,function(err,res,body){
-		var strbody = Json.parse(body);
-		console.log("get response text from tuling :"+strbody);
+		var strbody = JSON.parse(body);
+		console.log("get response text from tuling :"+strbody.code+"   "+strbody.text);
 		return strbody.text;
 		});
 }
