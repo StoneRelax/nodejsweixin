@@ -18,7 +18,7 @@ function autoreply(req,res){
 });
 }
 function getTulingRes(info){
-	var defer = Q.derfer();
+	var defer = Q.defer();
 	info = info.toString();
 	console.log("getTulingRes got the input  "+info);
 	var infolist = {
