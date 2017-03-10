@@ -1,50 +1,42 @@
 /* jslint node:true */
 "use strict";
-const request = require('request');
-const config = require('../config.js');
-var Q = require("q");
+var getTulingRes = require("./getTulingRes.js");
+var createresmsg = require("./createresmsg.js");
 
+/** 
+ * [POST "/" use tuling robot api ]
+ * @param  {http req} req ["standard http req"]
+ * @param  {http req} res ["standard http res"]
+ * @return {[type]}     [description]
+ */
 function autoreply(req,res){
 	console.log('starting parsing');
-	var infostr = req.body.xml.content;
-	console.log(infostr);
-	//var codedcontent = encodeURI(reqxml);
-	//console.log(condedcontent);
-	getTulingRes(infostr).then(function(data){
-	var strbody = JSON.parse(data);
-	console.log("get response text from tuling :"+strbody.code+"   "+strbody.text);
-	var tulingsays = strbody.text;
-	res.end('<xml><ToUserName><![CDATA['+req.body.xml.fromusername+']]></ToUserName><FromUserName><![CDATA['+req.body.xml.tousername+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+tulingsays+']]></Content></xml>');
-});
-}
-function getTulingRes(info){
-	var defer = Q.defer();
-	info = info.toString();
-	console.log("getTulingRes got the input  "+info);
-	var infolist = {
-		key:config.tulingkey,
-		info:info
-	};
-	console.log("infolist: "+JSON.stringify(infolist));
-	var options = {
-	method:'POST',
-	url:config.tulingapi,
-	headers:{
-	'content-type': "application/json"
-		},
-	body:JSON.stringify(infolist)
-	};
-	console.log(options);
-	console.log('now sending api to tuling');	
-	request(options,function(err,res,body){
-		
-		if(res){
-			defer.resolve(body);
-		} else if(err){
-			Q.reject(err);
+	var msgstr = req.body.xml.content;
+	var msgtype = req.body.xml.MsgType;
+	var reqxml = req.body.xml;
+	var fromuser = reqxml.FromUserName;
+	var touser = reqxml.ToUserName;
+	switch(msgtype){
+		case("text") : {
+			getTulingRes(msgstr).then(function(body){
+			var strbody = JSON.parse(body);
+			res.end(createresmsg(strbody,reqxml));
+			});
+			break;
 		}
-		});
-	return defer.promise;
+		case("image") : {
+			res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[机器人不接受斗图哦]]></Content></xml>');
+			break;
+		}
+		case("voice") : {
+			res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[机器人不接受语音撩拨哦]]></Content></xml>');
+			break;
+		}
+
+		default : {
+			res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[请输入正常的消息哦]]></Content></xml>');
+		}
+	}
 }
 
 module.exports = autoreply;
