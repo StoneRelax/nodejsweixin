@@ -11,6 +11,21 @@ var users = require('./routes/users');
 var app = express();
 var xmlparser = require('express-xml-bodyparser');
 
+function schedule(){
+	setTimeout(function doit(){
+		savetoken(function(){
+			console.log("5");
+			schedule();
+		});
+	}, 5000);
+}
+function savetoken(){
+	console.log("token saved");
+}
+schedule();
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
