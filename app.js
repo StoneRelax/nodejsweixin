@@ -4,26 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var savetoken = require('./getaccesstoken.js');
+var expire = JSON.parse(fs.readFileSync('./access_token_expire')).time;
+setInterval(function(){
+	savetoken();
+},expire);
 
 var app = express();
 var xmlparser = require('express-xml-bodyparser');
-
-function schedule(){
-	setTimeout(function doit(){
-		savetoken(function(){
-			console.log("5");
-			schedule();
-		});
-	}, 5000);
-}
-function savetoken(){
-	console.log("token saved");
-}
-schedule();
-
 
 
 // view engine setup
