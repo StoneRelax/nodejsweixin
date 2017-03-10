@@ -18,11 +18,13 @@ function gettoken(){
 }
 
 function savetoken(){
-	gettoken.then(function(body){
+	gettoken().then(function(body){
 		var bodystr = JSON.parse(body);
+		console.log(bodystr);
 		fs.writeFile('./access_token', bodystr.access_token);
 		setTimeout(savetoken(), bodystr.expires_in * 1000);
 	});
 }
+savetoken();
 
 module.exports = savetoken;
