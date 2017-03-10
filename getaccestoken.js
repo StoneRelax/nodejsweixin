@@ -7,7 +7,8 @@ const config = require('./config.js');
 
 function gettoken(){
 	var defer = new q.defer();
-	request("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid"+config.appid+"&secret"+config.appsecret,function(err,res,body){
+	var url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid"+config.appid+"&secret"+config.appsecret;
+	request(url,function(err,res,body){
 		if(err){
 			defer.reject(err);
 		} else if(res){
