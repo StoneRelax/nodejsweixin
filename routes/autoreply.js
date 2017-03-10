@@ -12,30 +12,29 @@ var createresmsg = require("./createresmsg.js");
 function autoreply(req,res){
 	console.log('starting parsing');
 	var msgstr = req.body.xml.content;
-	var msgtype = req.body.xml.MsgType;
+	var msgtype = req.body.xml.msgtype.toString();
 	var reqxml = req.body.xml;
-	var fromuser = reqxml.FromUserName;
-	var touser = reqxml.ToUserName;
+	var fromuser = reqxml.fromusername;
+	var touser = reqxml.tousername;
+	console.log('msgtype is '+msgtype);
 	switch(msgtype){
-		case("text") : {
+		case 'text' : 
 			getTulingRes(msgstr).then(function(body){
 			var strbody = JSON.parse(body);
-			res.end(createresmsg(strbody,reqxml));
+			console.log(strbody);
+			var resmsg = createresmsg(strbody,reqxml);
+			res.end(resmsg);
 			});
 			break;
-		}
-		case("image") : {
+		case 'image' : 
 			res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[机器人不接受斗图哦]]></Content></xml>');
 			break;
-		}
-		case("voice") : {
+		case 'voice' : 
 			res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[机器人不接受语音撩拨哦]]></Content></xml>');
 			break;
-		}
 
-		default : {
+		default : 
 			res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[请输入正常的消息哦]]></Content></xml>');
-		}
 	}
 }
 

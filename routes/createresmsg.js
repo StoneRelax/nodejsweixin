@@ -6,24 +6,26 @@
  * @param  {map[string,string]} reqxml [http request infos]
  */
 function createresmsg(data,reqxml){
-	var fromuser = reqxml.FromUserName;
-	var touser = reqxml.ToUserName;
+	var fromuser = reqxml.fromusername;
+	var touser = reqxml.tousername;
+	console.log(fromuser);
+	console.log(touser);
+	console.log(data.code);
+	console.log(data.text);
 	var resmsg;
 	switch(data.code){
-		case("1000000"): {
+		case 100000 : 
 			resmsg = '<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+data.text+']]></Content></xml>';
 			break;
-		}
-
-		case("200000") : {
+		
+		case 200000 : 
 			resmsg = '<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+data.text+"\n"+data.url+']]></Content></xml>';
 			break;
-		}
 
-		case("302000") : {
+		case 302000 : 
 			resmsg = '<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['+data.text+"\n"+data.list[0].article+"\n"+data.list[0].source+"\n"+data.list[0].detailurl+']]></Content></xml>';
 			break;
-		}
+		
 		default : 
 			resmsg = '<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[机器人暂时还没有这个功能哟,爱你]]></Content></xml>';
 		}
