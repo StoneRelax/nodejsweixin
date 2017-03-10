@@ -19,7 +19,7 @@ function autoreply(req,res){
 	console.log('msgtype is '+msgtype);
 	switch(msgtype){
 		case 'text' : 
-			getTulingRes(msgstr).then(function(body){
+			getTulingRes(msgstr,fromuser).then(function(body){
 			var strbody = JSON.parse(body);
 			console.log(strbody);
 			var resmsg = createresmsg(strbody,reqxml);
