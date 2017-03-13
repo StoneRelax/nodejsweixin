@@ -8,11 +8,11 @@ var fs = require('fs');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var savetoken = require('./getaccesstoken.js');
-var expire = JSON.parse(fs.readFileSync('./access_token_expire')).time;
+var savetoken = require('./util/getaccesstoken.js');
+var expire = JSON.parse(fs.readFileSync('./util/access_token_expire')).time;
 setInterval(function(){
 	savetoken();
-},expire);
+},expire*1000);
 
 var app = express();
 var xmlparser = require('express-xml-bodyparser');
