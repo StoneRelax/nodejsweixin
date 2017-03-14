@@ -11,6 +11,7 @@ const menulist = require('./menulist.js');
 function deletemenulist(){
 	var defer = q.defer();
 	var url = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token='+token;
+	console.log('sending delete requesting');
 	request(url,function(err,res,body){
 		if(err){
 			console.log(err);
@@ -29,6 +30,7 @@ function uploadmenulist(){
 		url: urlstr,
 		body: JSON.stringify(menulist)
 	};
+	console.log('sending update request');
 	request(opt,function(err,res,body){
 		if (err) {
 			console.log(err);
@@ -47,5 +49,7 @@ deletemenulist().then(function(data){
 	var datastr = JSON.parse(data);
 	if(datastr.errcode === 0){
 		uploadmenulist();
+	} else {
+		console.log('delete request failed with errcode '+datastr.errcode+' and err msg is :'+datastr.errmsg);
 	}
 });
