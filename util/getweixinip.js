@@ -13,6 +13,7 @@ function getweixinip(){
 			process.abort();
 		} else {
 			var bodystr = JSON.parse(body);
+			console.log(bodystr);
 			var iplist = bodystr.ip_list;
 			fs.writeFileSync('./weixiniplist',iplist);
 		}

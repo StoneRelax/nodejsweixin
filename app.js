@@ -9,6 +9,7 @@ var fs = require('fs');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var savetoken = require('./util/getaccesstoken.js');
+savetoken();
 var expire = JSON.parse(fs.readFileSync('./util/access_token_expire')).time;
 setInterval(function(){
 	savetoken();
