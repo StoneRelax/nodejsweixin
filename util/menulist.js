@@ -1,32 +1,30 @@
 /* jshint node:true */
 "use strict";
 
-module.exports = {
-	'button':[
-	{
-		'type':"view",
-		'name':'访问百度',
-		'url':'http://www.baidu.com'
-	},
-	{
-		'type':"click",
-		'name':'点我加一',
-		'key':'someone_like_this'
-	},
-	{
-		'name':'菜单',
-		'sub_botton':[
-		{
-			'type':"view",
-			'name':'再看一次百度',
-			'url':'http://www.baidu.com'
-		},
-		{
-			'type':"click",
-			'name':'再加一次一',
-			'key':'someone_like_this'
-		}
-		]
-	}
-	]
-};
+module.exports =  {
+     "button":[
+     {	
+          "type":"click",
+          "name":"今日歌曲",
+          "key":"V1001_TODAY_MUSIC"
+      },
+      {
+           "name":"菜单",
+           "sub_button":[
+           {	
+               "type":"view",
+               "name":"搜索",
+               "url":"http://www.soso.com/"
+            },
+            {
+               "type":"view",
+               "name":"视频",
+               "url":"http://v.qq.com/"
+            },
+            {
+               "type":"click",
+               "name":"赞一下我们",
+               "key":"V1001_GOOD"
+            }]
+       }]
+ }
