@@ -33,6 +33,16 @@ function autoreply(req,res){
 			res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[机器人不接受语音撩拨哦]]></Content></xml>');
 			break;
 
+		case 'event' :
+			if (reqxml.eventkey === 'someone_like_us'){
+				res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[谢谢亲的支持，我们会继续努力哦]]></Content></xml>');
+			}
+			if (reqxml.event === 'view'){
+				res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[您访问的链接是'+reqxml.eventkey+'哦]]></Content></xml>');
+			}
+			break;
+
+
 		default : 
 			res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[请输入正常的消息哦]]></Content></xml>');
 	}
