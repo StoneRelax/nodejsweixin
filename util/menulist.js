@@ -29,7 +29,7 @@ module.exports =  {
          {
              "type":"click",
              "name":"再赞一下我们",
-             "key":"someone_like_us"
+             "key":"some_like_us"
          }]
        }]
  }
