@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+var weixinserver = require('./routes/weixinServer/index.js');
+
 var savetoken = require('./util/getaccesstoken.js');
 savetoken();
 var expire = JSON.parse(fs.readFileSync('./util/access_token_expire')).time;
@@ -32,8 +32,8 @@ app.use('/',xmlparser({type: 'text/xml'}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/weixinserver', weixinserver);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
