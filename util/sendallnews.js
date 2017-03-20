@@ -3,7 +3,8 @@
 
 var fs = require('fs');
 var request = require('request');
-var news= require('./newslist.txt');
+var news= JSON.parse(fs.readFileSync('./newslist.js'));
+console.log(news+"||"+news.media_id);
 const token = fs.readFileSync('./access_token');
 var bodyjson = {
    "filter":{

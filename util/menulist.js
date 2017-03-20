@@ -4,9 +4,9 @@
 module.exports =  {
      "button":[
      {	
-         "type":"view",
+         "type":"media_id",
          "name":"看下百度",
-         "url":"http://www.baidu.com"
+         "media_id":"fsEGvyDvpdz_au7K3i3qGm0SpEdbFHJC1QVKvuXFQxM"
       },
      {
      	"type":"click",
