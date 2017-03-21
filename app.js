@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 
 var weixinserver = require('./routes/weixinServer/index.js');
+var verifyweixinrequest = require('./util/verifyweixinrequest.js');
 
 var savetoken = require('./util/getaccesstoken.js');
 savetoken();
@@ -32,6 +33,8 @@ app.use('/',xmlparser({type: 'text/xml'}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var weixiniplist = fs.readFileSync('./util/weixiniplist').toString().split(",");
+app.use('/weixinserver',verifyweixinrequest(weixiniplist));
 app.use('/weixinserver', weixinserver);
 
 
