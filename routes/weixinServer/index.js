@@ -8,13 +8,13 @@ var autoreply = require('./autoreply');
 
 const url = require('url');
 const path = require('path');
-const config = require('../config');
+const config = require('../../config');
 
 /* GET home page. */
-/* router.get('/', function(req,res){
+router.get('/', function(req,res,next){
 	enterWeixin(req,res);
-});*/
-router.post('/',function(req,res){
+});
+router.post('/',function(req,res,next){
 	console.log('trying to reply');
 	console.log(req.body.xml.content);
 	autoreply(req,res);

@@ -8,9 +8,10 @@ var fs = require('fs');
 
 var weixinserver = require('./routes/weixinServer/index.js');
 var verifyweixinrequest = require('./util/verifyweixinrequest.js');
+var hello = require('./routes/site/index.js');
 
 var savetoken = require('./util/getaccesstoken.js');
-savetoken();
+//savetoken();
 var expire = JSON.parse(fs.readFileSync('./util/access_token_expire')).time;
 setInterval(function(){
 	savetoken();
@@ -33,10 +34,10 @@ app.use('/',xmlparser({type: 'text/xml'}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var weixiniplist = fs.readFileSync('./util/weixiniplist').toString().split(",");
-app.use('/weixinserver',verifyweixinrequest(weixiniplist));
+//var weixiniplist = fs.readFileSync('./util/weixiniplist').toString().split(",");
+app.use('/weixinserver',verifyweixinrequest);
 app.use('/weixinserver', weixinserver);
-
+app.use('/',hello);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

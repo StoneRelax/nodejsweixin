@@ -3,7 +3,7 @@
 	const crypto = require('crypto');
 	const url = require('url');
 	const path = require('path');
-	const config = require('../config.js');
+	const config = require('../../config.js');
 
 	function enterWeixin(req,res){
 	var query = url.parse(req.url,true).query;

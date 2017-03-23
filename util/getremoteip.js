@@ -1,9 +1,13 @@
 /* jshint node:true */
 "use strict";
+var util = require('util');
 
-module.exports=function getremoteip(req){
+function getremoteip(req){
 	var remoteip ;
-	var isforward = req.headers['x-real-ip'] || req.headers['x-forwarded-for'];
-	isforward ? remoteip=isforward : remoteip=req.connection.remoteAddress;
+	var headers = req.headers;
+	var isforward = headers['x-real-ip'] || headers['x-forwarded-for'];
+	isforward ? remoteip=isforward : remoteip=req.connection.remoteAddress.split(":")[3];
 	return remoteip;
 }
+
+module.exports = getremoteip;

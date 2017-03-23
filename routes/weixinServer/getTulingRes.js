@@ -2,7 +2,7 @@
 "use strict";
 var Q = require("q");
 var request = require("request");
-const config = require("../config.js");
+const config = require("../../config.js");
 
 
 /** 
