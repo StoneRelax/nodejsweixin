@@ -4,6 +4,7 @@ var request = require('request');
 var q = require('q');
 var fs = require('fs');
 var config = require('../config');
+var redisdb = require('./redisdb.js');
 
 function getaccesstoken(){
 	var defer = new q.defer();
@@ -21,10 +22,12 @@ function getaccesstoken(){
 	connection.then(function(body){
 		var bodystr = JSON.parse(body);
 		console.log(bodystr);
-		fs.writeFile('./util/access_token',bodystr.access_token);
+		redisdb.set('access_token',bodystr.access_token.toString(),redisdb.print);
+		//fs.writeFile('./util/access_token',bodystr.access_token);
 		var expire = {};
 		expire.time = bodystr.expires_in;
-		fs.writeFile('./util/access_token_expire', JSON.stringify(expire));
+		redisdb.set('access_token_expire',bodystr.expires_in.toString(),redisdb.print);
+		//fs.writeFile('./util/access_token_expire', JSON.stringify(expire));
 	});
 }
 

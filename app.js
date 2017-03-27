@@ -5,17 +5,19 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var redisdb = require('./util/redisdb.js');
 
 var weixinserver = require('./routes/weixinServer/index.js');
 var verifyweixinrequest = require('./util/verifyweixinrequest.js');
 var hello = require('./routes/site/index.js');
 
 var savetoken = require('./util/getaccesstoken.js');
-//savetoken();
-var expire = JSON.parse(fs.readFileSync('./util/access_token_expire')).time;
-setInterval(function(){
-	savetoken();
-},expire*1000);
+savetoken();
+redisdb.get('access_token_expire',function(err,time){
+	var expire = time;
+	setInterval(function(){savetoken();},expire*1000);
+});
+
 
 var app = express();
 var xmlparser = require('express-xml-bodyparser');
