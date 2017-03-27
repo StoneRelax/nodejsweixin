@@ -2,6 +2,7 @@
 "use strict";
 var getTulingRes = require("./getTulingRes.js");
 var createresmsg = require("./createresmsg.js");
+var redisdb = require('../../../util/redisdb.js');
 
 /** 
  * [POST "/" use tuling robot api ]
@@ -34,9 +35,11 @@ function autoreply(req,res){
 			break;
 
 		case 'event' :
-			console.log(reqxml);
 			if (reqxml.eventkey.toString() === "some_like_us"){
-				res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[谢谢亲的支持，我们会继续努力哦]]></Content></xml>');
+				redisdb.incrby('stars',1);
+				redisdb.get('stars').then(function(data){
+					res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[已经有 '+data+' 人支持我们！谢谢亲的支持，我们会继续努力哦]]></Content></xml>');
+				});
 			}
 			if (reqxml.event.toString() === "VIEW"){
 				res.end('<xml><ToUserName><![CDATA['+fromuser+']]></ToUserName><FromUserName><![CDATA['+touser+']]></FromUserName><CreateTime>'+parseInt(new Date())+'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[您访问的链接是'+reqxml.eventkey+'哦]]></Content></xml>');
