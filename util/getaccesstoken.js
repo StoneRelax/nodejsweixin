@@ -24,7 +24,7 @@ function getaccesstoken(){
 		console.log(bodystr);
 		redisdb.set("access_token",bodystr.access_token.toString());
 		//fs.writeFile('./util/access_token',bodystr.access_token);
-		redisdb.set("access_token_expire",bodystr.expires_in.toString(),redisdb.print);
+		redisdb.set("access_token_expire",bodystr.expires_in.toString());
 		//fs.writeFile('./util/access_token_expire', JSON.stringify(expire));
 	});
 }
