@@ -1,0 +1,24 @@
+body{
+	background-color:#f1f1f1;
+}
+
+.logo-search{
+	color:rgb(50, 144, 58);
+	height: 80px;
+}
+
+.login-register{
+	padding:45px 0 0 0;
+	height: 80px;
+}
+.logo {
+	height: 80px;
+	padding:15px 0 0 40px;
+	
+}
+.search {
+	padding:0 0 0 0;
+	margin:45px 0 0 0;
+	width: 240px;
+	height: 35px;
+}
