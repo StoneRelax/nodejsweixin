@@ -22,11 +22,9 @@ function getaccesstoken(){
 	connection.then(function(body){
 		var bodystr = JSON.parse(body);
 		console.log(bodystr);
-		redisdb.set('access_token',bodystr.access_token.toString(),redisdb.print);
+		redisdb.set("access_token",bodystr.access_token.toString());
 		//fs.writeFile('./util/access_token',bodystr.access_token);
-		var expire = {};
-		expire.time = bodystr.expires_in;
-		redisdb.set('access_token_expire',bodystr.expires_in.toString(),redisdb.print);
+		redisdb.set("access_token_expire",bodystr.expires_in.toString(),redisdb.print);
 		//fs.writeFile('./util/access_token_expire', JSON.stringify(expire));
 	});
 }
