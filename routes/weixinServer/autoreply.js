@@ -2,7 +2,7 @@
 "use strict";
 var getTulingRes = require("./getTulingRes.js");
 var createresmsg = require("./createresmsg.js");
-var redisdb = require('../../../util/redisdb.js');
+var redisdb = require('../../util/redisdb.js');
 
 /** 
  * [POST "/" use tuling robot api ]
