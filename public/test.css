@@ -12,9 +12,7 @@
 	.login-register{
 		padding:45px 0 0 0;
 		height: 80px;
-	}
-	.loginbtn{
-		max-width: 90%;
+		max-width: 50%;
 	}
 	.logo {
 		height: 80px;
