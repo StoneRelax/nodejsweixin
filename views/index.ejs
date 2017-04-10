@@ -10,38 +10,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body class="ng-app">
+    <!-- 标题-搜索栏 -->
   	<div class="container logo-search">
   		<div class="row">
+        <!-- logo -->
   			<div class="col-xs-12 col-log-6 col-md-6 logo">
   				<h1 class="heading">x旅游网</h1>
   			</div>
+        <!-- 登陆注册按钮组 -->
   			<div class="col-xs-6 col-lg-3 btn-group col-md-3 login-register">
   				  <button type="button" class="btn btn-default"><a href="/Users/shithuang/Documents/NODEJS/">注册</a></button>
   				  <button type="button" class="btn btn-default">登陆</button>
   				  <button type="button" class="btn btn-default">订单查询</button>
   			</div>
+        <!-- 站内搜索栏 -->
   			<div class="col-xs-6 col-lg-3 col-md-3 search">
 				<form class="form-inline searchform" role="form" action="/Users/shithuang/Documents/NODEJS/">
-					<div class="form-group">
-						<label class="sr-only" for="searchfor">search</label>
 						<input type="text" class="form-control" placeholder=搜索路线 id="searchfor">
-					</div>
 				</form>
 			</div>
   		</div>
   	</div>
-  	
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container">
-        <div class="navbar-header"><a href="#" class="navbar-brand">首页</a></div>
-        <div>
-          <ul class="nav navbar-nav">
-            <li><a href="#" class="navbar-brand">aaa</a></li>
+  	<!-- 顶部导航栏 -->
+    <div class="container navigation">
+      <div class="row navigationbar">
+        <div class="col-md-3 navbtn">
+          <h4>首页</h4>
+        </div>
+        <div class="col-md-3 navbtn">
+          <h4>区A</h4>
+        </div>
+        <div class="col-md-3 navbtn">
+          <h4>区B</h4>
+        </div>
+        <div class="col-md-3 navbtn dropdown">
+          <h4 class="dropdown-toggle" data-toggle="dropdown">其它</h4>
+          <ul class="dropdown-menu">
+            <li class="navddli">miao</li>
+            <li class="navddli">mi</li>
           </ul>
         </div>
       </div>
-    </nav>
-
+    </div>
+    <!-- 内容主体 -->
+    <div class="container maincontent">
+      <div class="row firstrow">
+        <!-- 左侧边栏 -->
+        <div class="col-md-3 leftbarcontainer">
+        <ul class="nav nav-stacked leftbar">
+          <li class="dropdown" id="dropdownmenuclass1">
+          <div class="dropdown-toggle" data-toggle="dropdown">分类1</div>
+            <ul class="dropdown-menu ">
+              <li>miaomiaomiao1</li>
+              <li>miaomiaomiao2</li>
+            </ul>
+          </li>
+          
+          <li>分类2</li>
+          <li>分类3</li>
+          <li>分类4</li>
+        </ul>
+        </div>
+        <!-- 幻灯片 -->
+        <div id="topcarousel" class="col-md-9 carousel slide">
+          <!-- 小圆点 -->
+          <ol class="carousel-indicators">
+            <li data-target="#topcarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#topcarousel" data-slide-to="1"></li>
+            <li data-target="#topcarousel" data-slide-to="2"></li>
+            <li data-target="#topcarousel" data-slide-to="3"></li>
+          </ol>
+          <!-- 图片内容 -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="/Users/shithuang/workspace/pic0.jpeg" alt>
+              <div class="carousel-caption">示例图片说明文字1</div>
+            </div>
+            <div class="item">
+              <img src="/Users/shithuang/workspace/pic1.jpeg" alt>
+              <div class="carousel-caption">示例图片说明文字2</div>
+            </div>
+            <div class="item">
+              <img src="/Users/shithuang/workspace/pic2.jpeg" alt>
+              <div class="carousel-caption">示例图片说明文字3</div>
+            </div>
+            <div class="item">
+              <img src="/Users/shithuang/workspace/pic3.jpeg" alt>
+              <div class="carousel-caption">示例图片说明文字4</div>
+            </div>
+          </div>
+          <!-- 左右切换 -->
+          <a href="#topcarousel" class="left carousel-control" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">前一个</span>
+          </a>
+          <a href="#topcarousel" class="right carousel-control" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right aria-hidden="true></span>
+            <span class="sr-only">下一个</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
   </body>
 </html>
 
