@@ -22,13 +22,77 @@
 	.search {
 		padding:45px 0 0 0;
 		height: 80px;
+		width: 200px;
+		max-width: 90%
 	}
 	.searchform{
 		max-width: 90%;
 	}
 	.navigation{
-		height: 50px;
+		width: 100%;
+		margin: 0 0 0 0;
+		height: 40px;
+		background-color: #96b97d;  
+    border-radius: 5px;     
+    border-color: #000 #000 #000 #000;  
 	}
-	.navbar{
-		height: 50px;
+	.navigationbar{
+		height: 40px;
+		padding: 0 200px 0 200px;
+
 	}
+	.navbtn{
+		text-align: center;
+		background-color: #96b97d;
+		color: #8c6838;
+		height: 40px;
+		border: 0 0 0 0;
+		line-height: 40px; 
+	}
+	.navbtn:hover{
+		background-color: #accabe;
+	}
+	.navddli{
+		text-align: center;
+		width: 275px;
+		background-color: #96b97d;
+		color: #8c6838;
+		height: 40px;
+		padding: 0 0 0 0;
+		line-height: 40px;
+	}
+	.navddli:hover{
+		background-color: #accabe;
+	}
+	.maincontent{
+		width: 100%;
+	}
+	.firstrow{
+		padding: 0 200px 0 200px;
+	}
+	.leftbarcontainer{
+		padding: 0 0 0 0;
+	}
+	.leftbar{
+		height: auto;
+		background-color: #accabe;
+	}
+	.leftbar li{
+		height: 70px;
+		line-height: 60px;
+		text-align: center;
+	}
+
+	ul.leftbar li:hover{
+		background-color: #bbbabe;
+	}
+	.carousel{
+		padding: 0 0 0 0;
+		max-width: 100%;
+		height:286px ;
+	}
+	.carousel .item{
+		max-width: 100%;
+		max-height: 285px;
+	}
+
